@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
 
     FILE *file = fopen(csv_file_path, "r");
 
-    
+    int i = 2;
 
     if (file == NULL) {
         perror("Error opening file");
@@ -92,9 +92,19 @@ int main(int argc, char *argv[]) {
             }
             
         }
-
     
-    else if (argv[1] == "-h"){
+    if (argv[i] == "-min" || "-max" || "-mean" || "-records"){
+        int check = atoi(argv[2]);
+        
+        if (check == 0 && argv[2] != '0'){
+            printf("Please input a valid integer unless you use -h\n")
+                
+                exit(EXIT_FAILURE);
+        }
+        
+    if (argv[1] == "-h"){
+        
+        
         
         //Check if min,max...are used without -h. Makes sure next arguement is an integer
         if (argv[i] == "-min" || "-max" || "-mean" || "-records"){
@@ -107,8 +117,8 @@ int main(int argc, char *argv[]) {
             }
         }
     }
-
+    
     fclose(file);
     exit(EXIT_SUCCESS);
-}
+    }
 
