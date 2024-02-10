@@ -4,7 +4,7 @@
 
 int count_fields(const char *csv_file_path) {
 
-    char line[1024];  // Assuming a maximum line length of 1024 characters
+    char line[4096];  // Assuming a maximum line length of 1024 characters
     fgets(line, sizeof(line), file);
 
     // Count the number of fields in the first line
@@ -21,13 +21,15 @@ int count_fields(const char *csv_file_path) {
 int count_lines(const char *csv_file_path) {
 
     int num_lines = 0;
-    char line[1024];  // Assuming a maximum line length of 1024 characters
+    char line[4096];  // Assuming a maximum line length of 1024 characters
     while (fgets(line, sizeof(line), file) != NULL) {
         num_lines++;
     }
 
     return num_lines;
 }
+
+
 
 int main(int argc, char *argv[]) {
     
@@ -46,6 +48,17 @@ int main(int argc, char *argv[]) {
     if (argv[1] == "-r"){
         int num_lines = count_lines(csv_file_path);
         printf("The CSV file has %d lines.\n", num_lines);
+    }
+
+    //Check if min,max...are used without -h. Makes sure next arguement is an integer
+    if (argv[1] == "-min" || "-max" || "-mean" || "-records"){
+        int check = atoi(argv[2]);
+        
+        if (check == 0 && argv[2] != '0'){
+            printf("Please input a valid integer unless you use -h\n")
+
+                exit(EXIT_FAILURE);
+        }
     }
 
     fclose(file);
