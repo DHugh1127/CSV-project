@@ -45,7 +45,14 @@ int count_lines(const char *csv_file_path) {
 
 int main(int argc, char *argv[]) {
     const char *csv_file_path = "your_file.csv";
-    
+
+    int i = 0;
+    int count = 0;
+    while(argv[i] != NULL){
+        i++;
+        count++;
+    }
+        
     if (argv[1] == "-f"){
         int num_fields = count_fields(csv_file_path);
         printf("The CSV file has %d fields.\n", num_fields);
@@ -55,6 +62,12 @@ int main(int argc, char *argv[]) {
         int num_lines = count_lines(csv_file_path);
         printf("The CSV file has %d lines.\n", num_lines);
     }
+
+    if (argv[1] == "-min"){
+        
+        
+    }
     
     exit(EXIT_SUCCESS);
 }
+
