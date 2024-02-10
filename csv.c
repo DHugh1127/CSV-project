@@ -3,11 +3,6 @@
 #include <string.h>
 
 int count_fields(const char *csv_file_path) {
-    FILE *file = fopen(csv_file_path, "r");
-    if (file == NULL) {
-        perror("Error opening file");
-        exit(EXIT_FAILURE);
-    }
 
     char line[1024];  // Assuming a maximum line length of 1024 characters
     fgets(line, sizeof(line), file);
@@ -20,18 +15,10 @@ int count_fields(const char *csv_file_path) {
         token = strtok(NULL, ",");
     }
 
-
-
-    fclose(file);
     return num_fields;
 }
 
 int count_lines(const char *csv_file_path) {
-    FILE *file = fopen(csv_file_path, "r");
-    if (file == NULL) {
-        perror("Error opening file");
-        exit(EXIT_FAILURE);
-    }
 
     int num_lines = 0;
     char line[1024];  // Assuming a maximum line length of 1024 characters
@@ -39,12 +26,17 @@ int count_lines(const char *csv_file_path) {
         num_lines++;
     }
 
-    fclose(file);
     return num_lines;
 }
 
 int main(int argc, char *argv[]) {
-    const char *csv_file_path = "your_file.csv";
+    
+    const char *csv_file_path = "example.csv";
+
+    FILE *file = fopen(csv_file_path, "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        exit(EXIT_FAILURE);   }
     
     if (argv[1] == "-f"){
         int num_fields = count_fields(csv_file_path);
@@ -55,6 +47,7 @@ int main(int argc, char *argv[]) {
         int num_lines = count_lines(csv_file_path);
         printf("The CSV file has %d lines.\n", num_lines);
     }
-    
+
+    fclose(file);
     exit(EXIT_SUCCESS);
 }
