@@ -67,8 +67,6 @@ char **head_strings(const char *csv_file_path) {
 
 int main(int argc, char *argv[]) {
 
-    const char *csv_file_path = "your_file.csv";
-
     const char *csv_file_path = "example.csv";
 
     FILE *file = fopen(csv_file_path, "r");
@@ -79,8 +77,7 @@ int main(int argc, char *argv[]) {
         perror("Error opening file");
         exit(EXIT_FAILURE);   }
     
-    if(argc == 3)
-        {
+    if(argc == 3){
             if (argv[1] == "-f"){
                 int num_fields = count_fields(csv_file_path);
                 printf("The CSV file has %d fields.\n", num_fields);
@@ -97,10 +94,11 @@ int main(int argc, char *argv[]) {
         int check = atoi(argv[2]);
         
         if (check == 0 && argv[2] != '0'){
-            printf("Please input a valid integer unless you use -h\n")
+            printf("Please input a valid integer unless you use -h\n");
                 
                 exit(EXIT_FAILURE);
         }
+    }       
         
     if (argv[1] == "-h"){
         
@@ -111,7 +109,7 @@ int main(int argc, char *argv[]) {
             int check = atoi(argv[2]);
             
             if (check == 0 && argv[2] != '0'){
-                printf("Please input a valid integer unless you use -h\n")
+                printf("Please input a valid integer unless you use -h\n");
                     
                     exit(EXIT_FAILURE);
             }
@@ -120,5 +118,5 @@ int main(int argc, char *argv[]) {
     
     fclose(file);
     exit(EXIT_SUCCESS);
-    }
+}
 
