@@ -64,6 +64,56 @@ char **head_strings(const char *csv_file_path) {
     
 }
 
+//if argv[i] is either min mean or max, send the correct function code and argv[i+1](column) 
+int calcMMM(int code, int column)
+{
+//First preload the first value into a variable
+    
+    for(int i = 0; i < count_lines(csv_file_path); i++){
+        char line[4096];  // Assuming a maximum line length of 1024 cha \
+    racters
+        fgets(line, sizeof(line), csv_file_path);
+        char *token = strtok(line, ",");
+     
+        for(int j = 0; j < column; j++){
+            token = strtok(line, ",");
+        }                 
+
+        int value = atoi(token);  
+                       
+            
+    
+        switch (code){
+        case 0: //min
+            for(int i = 0; i < count_lines(csv_file_path)-1; i++){
+                char line[4096];  // Assuming a maximum line length of 1024 characters
+                fgets(line, sizeof(line), csv_file_path);
+                char *token = strtok(line, ",");
+                
+                for(int j = 0; j < column; j++){
+                    token = strtok(line, ",");
+                }       
+      
+                if(value > atoi(token)){
+                    value = atoi(token);
+                }
+            }
+            
+            break;
+        case 1: //max
+            break;
+        case 2: //mean
+            break;
+        }
+            /*for (i = 0; i < argc; i++){
+              if argv[i] == "min"
+              { calcMMR(0, argv[i+1])
+              
+              }
+              }
+            */
+}
+
 
 int main(int argc, char *argv[]) {
 
