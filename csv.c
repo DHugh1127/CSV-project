@@ -189,7 +189,7 @@ int main(int argc, char *argv[]) {
                 //Search through Brandons array, if argv[i+1] is not found, return EXIT_Failure
                 char **header == head_strings(csv_file_path);
                 for(int i = 0; i < count_fields(csv_file_path); i++){
-                    if(header[i][i] == argv[i+1]){
+                    if(header[i] == argv[i+1]){
                         //set flag if found, set column number
                         found = true;
                         int column = i;
