@@ -65,27 +65,27 @@ char **head_strings(const char *csv_file_path) {
 }
 
 //if argv[i] is either min mean or max, send the correct function code and argv[i+1](column) 
-int calcMMM(int code, int column)
+int calcMMM(int code, int column, const char *csv_file_path)
 {
 //First preload the first value into a variable
     
-    for(int i = 0; i < count_lines(csv_file_path); i++){
         char line[4096];  // Assuming a maximum line length of 1024 cha \
     racters
-        fgets(line, sizeof(line), csv_file_path);
+        fgets(line, sizeof(line), csv_file_path); //This grabs the header row
+        fgets(line, sizeof(line), csv_file_path); //This grabs our first line of data
         char *token = strtok(line, ",");
      
-        for(int j = 0; j < column; j++){
+        for(int j = 0; j < column-1; j++){
             token = strtok(line, ",");
         }                 
-
+    
+    //initial starting value for min
         int value = atoi(token);  
                        
-            
     
         switch (code){
         case 0: //min
-            for(int i = 0; i < count_lines(csv_file_path)-1; i++){
+            for(int i = 0; i < count_lines(csv_file_path)-2; i++){//the -2 is there since we already checked 2 rows
                 char line[4096];  // Assuming a maximum line length of 1024 characters
                 fgets(line, sizeof(line), csv_file_path);
                 char *token = strtok(line, ",");
@@ -105,13 +105,11 @@ int calcMMM(int code, int column)
         case 2: //mean
             break;
         }
-            /*for (i = 0; i < argc; i++){
-              if argv[i] == "min"
-              { calcMMR(0, argv[i+1])
-              
-              }
-              }
-            */
+}
+
+void calcR(int column, int value)
+{
+    
 }
 
 
@@ -171,10 +169,10 @@ int main(int argc, char *argv[]) {
 //Basic structure for main to search through all arguments in argv.
     for(int i = 1; i < argc; i++){//start at argv[1] 
         if(argv[i] == "-f"){
-            printf("The CSV file has %d fields.\n", num_fields);
+            printf("The CSV file has %d fields.\n", count_fields(csv_file_path));
         }
         else if(argv[i] == "-r"){
-            printf("The CSV file has %d lines.\n", num_lines);
+            printf("The CSV file has %d lines.\n", count_lines(csv_file_path));
         }
         else if(argv[i] == "-h"){
             //create flag so we know to use -h for min/max/mean
@@ -183,36 +181,37 @@ int main(int argc, char *argv[]) {
         else if(argv[i] == "-min"){
 
             if(hFLAG){
-                bool found = false;
                 
                 //Search through Brandons array, if argv[i+1] is not found, return EXIT_Failure
-                char **header == head_strings(csv_file_path);
+                char **header = head_strings(csv_file_path);
+                int column = -1; 
+                
                 for(int j = 0; j < count_fields(csv_file_path); j++){
                     if(header[j] == argv[i+1]){
-                        //set flag if found, set column number
-                        found = true;
-                        int column = j;
+                        //set column if found
+                        column = j;
                     }
                 }
 
-                if(!found){
+                if(column == -1){//If column variable is -1, then it means the specific column was not found.
                     printf("Invalid column name given for -min!\n");
-                    return(EXIT_FAILURE);
+                    exit(EXIT_FAILURE);
+                }
+                else{
+                    printf("%d\n", calcMMM(0, column, csv_file_path));
+                    i++; //skip the next argv[i] since it is a corresponding argument for min
                 }
                 
-         
-                printf("%d\n", calcMMM(0,column));
-                i++; //skip the next argv[i] since it is a corresponding argument for min
             }
 
             //CHECK IF NUMERIC VALUE IS NOT VALID
-            else if(argv[i+1] < count_fields(csv_file_path) &&  argv[i+1] > count_fields(csv_file_path)){
+            else if(atoi(argv[i+1]) < count_fields(csv_file_path) &&  atoi(argv[i+1]) > count_fields(csv_file_path)){
                 printf("Invalid numeric value for -min not found! (there are 0-%d usable columns)\n", count_fields(csv_file_path));
-                return(EXIT_FAILURE);
+                exit(EXIT_FAILURE);
             }
             
             else{
-                printf("%d\n", calcMMM(0, argv[i+1]));
+                printf("%d\n", calcMMM(0, atoi(argv[i+1]), csv_file_path));
                 i++; //skip the next argv[i] since it is a corresponding argument for min
             }
             
@@ -228,11 +227,13 @@ int main(int argc, char *argv[]) {
             
         }
         else if(argv[i] == "records"){
-            
+            if(hFLAG){
+                
+            }
         }
         else{
             printf("Invald arugument found!\n");
-            return(EXIT_FAILURE);
+            exit(EXIT_FAILURE);
         }
             
     }
