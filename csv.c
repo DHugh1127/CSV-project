@@ -122,7 +122,8 @@ int main(int argc, char *argv[]) {
     FILE *file = fopen(csv_file_path, "r");
 
     int i = 2;
-
+    bool hFLAG = false;
+    
     if (file == NULL) {
         perror("Error opening file");
         exit(EXIT_FAILURE);   }
@@ -165,6 +166,78 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+
+  
+//Basic structure for main to search through all arguments in argv.
+    for(int i = 1; i < argc; i++){//start at argv[1] 
+        if(argv[i] == "-f"){
+            
+        }
+        else if(argv[i] == "-r"){
+            
+        }
+        else if(argv[i] == "-h"){
+            //IMPLEMENT DONS CHECK FOR -h
+            //create flag so we know to used -h for min/max/mean
+            hFLAG = true;
+        }
+        else if(argv[i] == "-min"){
+
+            if(hFLAG){
+                bool found = false;
+                
+                //Search through Brandons array, if argv[i+1] is not found, return EXIT_Failure
+                char **header == head_strings(csv_file_path);
+                for(int i = 0; i < count_fields(csv_file_path); i++){
+                    if(header[i][i] == argv[i+1]){
+                        //set flag if found, set column number
+                        found = true;
+                        int column = i;
+                    }
+                }
+
+                if(!found){
+                    printf("Invalid column name given for -min!\n");
+                    return(EXIT_FAILURE);
+                }
+                
+         
+                printf("%d\n", calcMMM(0,column));
+                i++; //skip the next argv[i] since it is a corresponding argument for min
+            }
+
+            //CHECK IF NUMERIC VALUE IS NOT VALID
+            else if(argv[i+1] < count_fields(csv_file_path) &&  argv[i+1] > count_fields(csv_file_path)){
+                printf("Invalid numeric value for -min not found! (there are 0-%d usable columns)\n", count_fields(csv_file_path));
+                return(EXIT_FAILURE);
+            }
+            
+            else{
+                printf("%d\n", calcMMM(0, argv[i+1]));
+                i++; //skip the next argv[i] since it is a corresponding argument for min
+            }
+            
+        }
+        else if(argv[i] == "-max"){
+            
+            //check if min works first, then copy and paste code here for max
+            
+        }
+        else if(argv[i] == "-mean"){
+            
+            //check if min works first, then copy and past code here for mean
+            
+        }
+        else if(argv[i] == "records"){
+            
+        }
+        else{
+            printf("Invald arugument found!\n");
+            return(EXIT_FAILURE);
+        }
+            
+    }
+    
     
     fclose(file);
     exit(EXIT_SUCCESS);
