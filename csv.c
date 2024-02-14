@@ -171,14 +171,13 @@ int main(int argc, char *argv[]) {
 //Basic structure for main to search through all arguments in argv.
     for(int i = 1; i < argc; i++){//start at argv[1] 
         if(argv[i] == "-f"){
-            
+            printf("The CSV file has %d fields.\n", num_fields);
         }
         else if(argv[i] == "-r"){
-            
+            printf("The CSV file has %d lines.\n", num_lines);
         }
         else if(argv[i] == "-h"){
-            //IMPLEMENT DONS CHECK FOR -h
-            //create flag so we know to used -h for min/max/mean
+            //create flag so we know to use -h for min/max/mean
             hFLAG = true;
         }
         else if(argv[i] == "-min"){
@@ -188,11 +187,11 @@ int main(int argc, char *argv[]) {
                 
                 //Search through Brandons array, if argv[i+1] is not found, return EXIT_Failure
                 char **header == head_strings(csv_file_path);
-                for(int i = 0; i < count_fields(csv_file_path); i++){
-                    if(header[i] == argv[i+1]){
+                for(int j = 0; j < count_fields(csv_file_path); j++){
+                    if(header[j] == argv[i+1]){
                         //set flag if found, set column number
                         found = true;
-                        int column = i;
+                        int column = j;
                     }
                 }
 
