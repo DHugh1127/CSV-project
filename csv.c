@@ -116,7 +116,7 @@ void calcR(int column, int value)
 
 int main(int argc, char *argv[]) {
 
-    const char *csv_file_path = "example.csv";
+    const char *csv_file_path = argv[argc - 1];
 
     FILE *file = fopen(csv_file_path, "r");
 
