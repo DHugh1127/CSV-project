@@ -5,7 +5,7 @@
 
 // MAKE SURE TO GIT PULL BEFORE MAKING CHANGES
 
-int count_fields(const char *csv_file_path) {
+int count_fields(FILE *csv_file_path) {
 
     char line[4096];  // Assuming a maximum line length of 1024 characters
     fgets(line, sizeof(line), csv_file_path);
@@ -21,7 +21,7 @@ int count_fields(const char *csv_file_path) {
     return num_fields;
 }
 
-int count_lines(const char *csv_file_path) {
+int count_lines(FILE *csv_file_path) {
 
     int num_lines = 0;
     char line[4096];  // Assuming a maximum line length of 1024 characters
@@ -33,7 +33,7 @@ int count_lines(const char *csv_file_path) {
 }
 
 // function to grab the titles of the header line
-char **head_strings(const char *csv_file_path) {
+char **head_strings(FILE *csv_file_path) {
 
     int fields = 0;
     fields = count_fields(csv_file_path);
@@ -66,7 +66,7 @@ char **head_strings(const char *csv_file_path) {
 }
 
 //if argv[i] is either min mean or max, send the correct function code and argv[i+1](column) 
-int calcMMM(int code, int column, const char *csv_file_path)
+int calcMMM(int code, int column, FILE *csv_file_path)
 {
 //First preload the first value into a variable
     
@@ -129,12 +129,12 @@ int main(int argc, char *argv[]) {
     
     if(argc == 3){
             if (argv[1] == "-f"){
-                int num_fields = count_fields(csv_file_path);
+                int num_fields = count_fields(file);
                 printf("The CSV file has %d fields.\n", num_fields);
             }
             
             if (argv[1] == "-r"){
-                int num_lines = count_lines(csv_file_path);
+                int num_lines = count_lines(file);
                 printf("The CSV file has %d lines.\n", num_lines);
             }
             
@@ -170,10 +170,10 @@ int main(int argc, char *argv[]) {
 //Basic structure for main to search through all arguments in argv.
     for(int i = 1; i < argc; i++){//start at argv[1] 
         if(argv[i] == "-f"){
-            printf("The CSV file has %d fields.\n", count_fields(csv_file_path));
+            printf("The CSV file has %d fields.\n", count_fields(file));
         }
         else if(argv[i] == "-r"){
-            printf("The CSV file has %d lines.\n", count_lines(csv_file_path));
+            printf("The CSV file has %d lines.\n", count_lines(file));
         }
         else if(argv[i] == "-h"){
             //create flag so we know to use -h for min/max/mean
@@ -199,20 +199,20 @@ int main(int argc, char *argv[]) {
                     exit(EXIT_FAILURE);
                 }
                 else{
-                    printf("%d\n", calcMMM(0, column, csv_file_path));
+                    printf("%d\n", calcMMM(0, column, file));
                     i++; //skip the next argv[i] since it is a corresponding argument for min
                 }
                 
             }
 
             //CHECK IF NUMERIC VALUE IS NOT VALID
-            else if(atoi(argv[i+1]) < count_fields(csv_file_path) &&  atoi(argv[i+1]) > count_fields(csv_file_path)){
-                printf("Invalid numeric value for -min not found! (there are 0-%d usable columns)\n", count_fields(csv_file_path));
+            else if(atoi(argv[i+1]) < count_fields(file) &&  atoi(argv[i+1]) > count_fields(file)){
+                printf("Invalid numeric value for -min not found! (there are 0-%d usable columns)\n", count_fields(file));
                 exit(EXIT_FAILURE);
             }
             
             else{
-                printf("%d\n", calcMMM(0, atoi(argv[i+1]), csv_file_path));
+                printf("%d\n", calcMMM(0, atoi(argv[i+1]), file));
                 i++; //skip the next argv[i] since it is a corresponding argument for min
             }
             
