@@ -37,14 +37,15 @@ char **head_strings(FILE *csv_file_path) {
 
     int fields = 0;
     fields = count_fields(csv_file_path);
-    char *headers[fields];
+    
+    char **headers = (char **)malloc(fields * sizeof(char *));
     char whole_line[4096];
     fgets(whole_line, sizeof(whole_line), csv_file_path);
 
     int x = 0;
     int y = 0;
     int i = 0;
-    while(whole_line[i] != NULL)
+    while(whole_line[i] != '\0')
         {
             while(whole_line[i] != ',')
                 {
@@ -56,7 +57,7 @@ char **head_strings(FILE *csv_file_path) {
             x++;
             y = 0;
         }
-    return **headers;
+    return headers;
 
     
     
