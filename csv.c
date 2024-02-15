@@ -73,24 +73,24 @@ int calcMMM(int code, int column, FILE *csv_file_path)
     
         char line[4096];  // Assuming a maximum line length of 1024 cha \
     racters
+        char *token;
+        
         fgets(line, sizeof(line), csv_file_path); //This grabs the header row
         fgets(line, sizeof(line), csv_file_path); //This grabs our first line of data
-        char *token = strtok(line, ",");
      
-        for(int j = 0; j < column-1; j++){
+        for(int j = 0; j < column; j++){ 
             token = strtok(line, ",");
         }                 
     
     //initial starting value for min
         int value = atoi(token);  
-                       
+      
     
         switch (code){
         case 0: //min
             for(int i = 0; i < count_lines(csv_file_path)-2; i++){//the -2 is there since we already checked 2 rows
                 char line[4096];  // Assuming a maximum line length of 1024 characters
                 fgets(line, sizeof(line), csv_file_path);
-                char *token = strtok(line, ",");
                 
                 for(int j = 0; j < column; j++){
                     token = strtok(line, ",");
@@ -107,11 +107,26 @@ int calcMMM(int code, int column, FILE *csv_file_path)
         case 2: //mean
             break;
         }
+        return value;
 }
 
-void calcR(int column, int value)
+void calcR(int column, int value, FILE *csv_file_path)
 {
+    char line[4096];
+    char *token;
     
+    fgets(line, sizeof(line), csv_file_path); //This grabs the header row
+
+    for(int i = 0; i < count_lines(csv_file_path)-1; i++){ //the -1 since we grabbed header alreadyfor(int j = 0; j < column)
+        fgets(line, sizeof(line), csv_file_path);
+        
+        for(int j = 0; j < column; j++){
+            token = strtok(line, ",");
+        }
+        if(atoi(token) == value){
+            printf("%s\n",line);
+        }
+   }
 }
 
 
@@ -185,10 +200,10 @@ int main(int argc, char *argv[]) {
             if(hFLAG){
                 
                 //Search through Brandons array, if argv[i+1] is not found, return EXIT_Failure
-                char **header = head_strings(csv_file_path);
+                char **header = head_strings(file);
                 int column = -1; 
                 
-                for(int j = 0; j < count_fields(csv_file_path); j++){
+                for(int j = 0; j < count_fields(file); j++){
                     if(header[j] == argv[i+1]){
                         //set column if found
                         column = j;
