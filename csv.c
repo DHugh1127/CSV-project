@@ -202,8 +202,7 @@ int main(int argc, char *argv[]) {
             }
             
         }
-
-w        
+        
         else if(argv[i] == "-max"){
             
             //check if min works first, then copy and paste code here for max
