@@ -48,8 +48,10 @@ char **head_strings(FILE *csv_file_path) {
     int i = 0;
     while(whole_line[i] != '\0')
         {
+            headers[x] = (char *) malloc(512 * sizeof(char));
             while(whole_line[i] != ',')
                 {
+                   
                     headers[x][y] = whole_line[i];
                     y++;
                     i++;
