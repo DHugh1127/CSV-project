@@ -79,7 +79,7 @@ int calcMMM(int code, int column, FILE *csv_file_path)
         fgets(line, sizeof(line), csv_file_path); //This grabs the header row
         fgets(line, sizeof(line), csv_file_path); //This grabs our first line of data
      
-        for(int i = 0; i < column; i++){ 
+        for(int i = 0; i <= column; i++){ 
             token = strtok(line, ",");
         }                 
     
@@ -93,7 +93,7 @@ int calcMMM(int code, int column, FILE *csv_file_path)
                 char line[4096];  // Assuming a maximum line length of 1024 characters
                 fgets(line, sizeof(line), csv_file_path);
                 
-                for(int j = 0; j < column; j++){
+                for(int j = 0; j <= column; j++){
                     token = strtok(line, ",");
                 }       
       
@@ -122,7 +122,7 @@ void calcR(int column, int value, FILE *csv_file_path)
     for(int i = 0; i < count_lines(csv_file_path)-1; i++){ //the -1 since we grabbed header alreadyfor(int j = 0; j < column)
         fgets(line, sizeof(line), csv_file_path);
         
-        for(int j = 0; j < column; j++){
+        for(int j = 0; j <= column; j++){
             token = strtok(line, ",");
         }
         if(atoi(token) == value){
@@ -221,7 +221,7 @@ int main(int argc, char *argv[]) {
             }
 
             //CHECK IF NUMERIC VALUE IS NOT VALID
-            else if(atoi(argv[i+1]) < 0 &&  atoi(argv[i+1]) > count_fields(file)){
+            else if(atoi(argv[i+1]) < 0 ||  atoi(argv[i+1]) > count_fields(file)){
                 printf("Invalid numeric value for -min not found! (there are 0-%d usable columns)\n", count_fields(file));
                 exit(EXIT_FAILURE);
             }
