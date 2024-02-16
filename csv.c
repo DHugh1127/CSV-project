@@ -58,6 +58,10 @@ char **head_strings(FILE *csv_file_path) {
             x++;
             y = 0;
         }
+    for(int i = 0; i < 0; i++)
+        {
+            printf("%s", headers[i]);
+        }
     return headers;
 
     
