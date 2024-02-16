@@ -166,6 +166,9 @@ int main(int argc, char *argv[]) {
         }
         else if(strcmp(argv[i], "-min") == 0){
 
+            calcMMM(0, atoi(argv[i+1]), generateFile(csv_file_path));
+            
+        }
             if(hFLAG){
                 
                 //Search through Brandons array, if argv[i+1] is not found, return EXIT_Failure
@@ -201,20 +204,19 @@ int main(int argc, char *argv[]) {
                 i++; //skip the next argv[i] since it is a corresponding argument for min
             }
             
-        }
-
-w        
-        else if(argv[i] == "-max"){
+        
+        
+            if(strcmp(argv[i], "-max" ) == 0){
             
             //check if min works first, then copy and paste code here for max
             
         }
-        else if(argv[i] == "-mean"){
+            else if(strcmp(argv[i],"-mean") == 0){
             
             //check if min works first, then copy and past code here for mean
             
         }
-        else if(argv[i] == "records"){
+            else if(strcmp(argv[i], "-records") == 0){
             if(hFLAG){
                 
             }
@@ -222,12 +224,6 @@ w
         else{
             printf("Invalid arugument found!\n");
             exit(EXIT_FAILURE);
-        }
-            
-    }
-    
-    
-    //fclose(file);
-    exit(EXIT_SUCCESS);
-}
+        }}}
 
+    
