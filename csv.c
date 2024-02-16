@@ -90,7 +90,7 @@ int calcMMM(int code, int column, FILE *csv_file_path)
         switch (code){
         case 0: //min
             for(int i = 0; i < count_lines(csv_file_path)-2; i++){//the -2 is there since we already checked 2 rows
-                char line[4096];  // Assuming a maximum line length of 1024 characters
+          
                 fgets(line, sizeof(line), csv_file_path);
                 
                 for(int j = 0; j <= column; j++){
@@ -225,8 +225,8 @@ int main(int argc, char *argv[]) {
             }
 
             //CHECK IF NUMERIC VALUE IS NOT VALID
-            else if(atoi(argv[i+1]) < 0 ||  atoi(argv[i+1]) > count_fields(generateFile(csv_file_path))){
-                printf("Invalid numeric value for -min not found! (there are 0-%d usable columns)\n", count_fields(generateFile(csv_file_path)));
+            else if(atoi(argv[i+1]) < 0 ||  atoi(argv[i+1]) >= count_fields(generateFile(csv_file_path))){
+                printf("Invalid numeric value for -min not found! (there are 0-%d usable columns)\n", count_fields(generateFile(csv_file_path))-1);
                 exit(EXIT_FAILURE);
             }
             
