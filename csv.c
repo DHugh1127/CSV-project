@@ -151,45 +151,7 @@ int main(int argc, char *argv[]) {
     if (generateFile(csv_file_path) == NULL) {
         perror("Error opening file");
           exit(EXIT_FAILURE);   }
-/*    
-    if(argc == 3){
-            if (argv[1] == "-f"){
-                int num_fields = count_fields(file);
-                printf("The CSV file has %d fields.\n", num_fields);
-            }
-            
-            if (argv[1] == "-r"){
-                int num_lines = count_lines(file);
-                printf("The CSV file has %d lines.\n", num_lines);
-            }
-            
-        }
-    
-    if (argv[i] == "-min" || "-max" || "-mean" || "-records"){
-        int check = atoi(argv[2]);
-        
-        if (check == 0 && argv[2] != '0'){
-            printf("Please input a valid integer unless you use -h\n");
-                
-                exit(EXIT_FAILURE);
-        }
-    }       
-        
-        
-        
-        //Check if min,max...are used without -h. Makes sure next arguement is an integer
-        if (argv[i] == "-min" || "-max" || "-mean" || "-records"){
-            int check = atoi(argv[2]);
-            
-            if (check == 0 && argv[2] != '0'){
-                printf("Please input a valid integer unless you use -h\n");
-                    
-                    exit(EXIT_FAILURE);
-            }
-        }
-    */
-
-  
+ 
 //Basic structure for main to search through all arguments in argv.
     for(int i = 1; i < argc-1; i++){//start at argv[1] 
         if(strcmp(argv[i], "-f") == 0){
@@ -241,10 +203,7 @@ int main(int argc, char *argv[]) {
             
         }
 
-
-
-
-        
+w        
         else if(argv[i] == "-max"){
             
             //check if min works first, then copy and paste code here for max
