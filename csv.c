@@ -49,7 +49,7 @@ char **head_strings(FILE *csv_file_path) {
     while(whole_line[i] != '\0')
         {
             headers[x] = (char *) malloc(512 * sizeof(char));
-            while(whole_line[i] != ',')
+            while(whole_line[i] != ',' || whole_line[i] != '\n')
                 {
                    
                     headers[x][y] = whole_line[i];
