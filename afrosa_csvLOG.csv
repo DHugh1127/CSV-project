@@ -1,0 +1,7 @@
+DATE,		UBIT,		DURATION,	ACTIVITY & TOOL DESCRIPTION
+2/13/24,	afrosa,		1 hour,		started working on min/max/mean function
+2/13/24		afrosa,		2 hour,  	began creating struction for main function to look through all argv arguments
+2/14/24,	afrosa,		2 hour,		continute working on main, implementing argument checks
+2/14/24,	afrosa,		1 hour,		run through code fixing some bugs/syntax errors on min/max/mean function and main
+2/15/24,	afrosa,		30 min,		started records function
+2/16/24,	afrosa,		45 mins,	debug -f and -r and started debugging -min
