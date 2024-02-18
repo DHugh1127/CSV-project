@@ -48,8 +48,10 @@ char **head_strings(FILE *csv_file_path) {
     int i = 0;
     while(whole_line[i] != '\0')
         {
-            while(whole_line[i] != ',')
+            headers[x] = (char *) malloc(512 * sizeof(char));
+            while(whole_line[i] != ',' && whole_line[i] != '\n')
                 {
+                   
                     headers[x][y] = whole_line[i];
                     y++;
                     i++;
@@ -57,6 +59,10 @@ char **head_strings(FILE *csv_file_path) {
             i++;
             x++;
             y = 0;
+        }
+    for(int i = 0; i < 0; i++)
+        {
+            printf("%s", headers[i]);
         }
     return headers;
 
@@ -147,45 +153,7 @@ int main(int argc, char *argv[]) {
     if (generateFile(csv_file_path) == NULL) {
         perror("Error opening file");
           exit(EXIT_FAILURE);   }
-/*    
-    if(argc == 3){
-            if (argv[1] == "-f"){
-                int num_fields = count_fields(file);
-                printf("The CSV file has %d fields.\n", num_fields);
-            }
-            
-            if (argv[1] == "-r"){
-                int num_lines = count_lines(file);
-                printf("The CSV file has %d lines.\n", num_lines);
-            }
-            
-        }
-    
-    if (argv[i] == "-min" || "-max" || "-mean" || "-records"){
-        int check = atoi(argv[2]);
-        
-        if (check == 0 && argv[2] != '0'){
-            printf("Please input a valid integer unless you use -h\n");
-                
-                exit(EXIT_FAILURE);
-        }
-    }       
-        
-        
-        
-        //Check if min,max...are used without -h. Makes sure next arguement is an integer
-        if (argv[i] == "-min" || "-max" || "-mean" || "-records"){
-            int check = atoi(argv[2]);
-            
-            if (check == 0 && argv[2] != '0'){
-                printf("Please input a valid integer unless you use -h\n");
-                    
-                    exit(EXIT_FAILURE);
-            }
-        }
-    */
-
-  
+ 
 //Basic structure for main to search through all arguments in argv.
     for(int i = 1; i < argc-1; i++){//start at argv[1] 
         if(strcmp(argv[i], "-f") == 0){
@@ -200,6 +168,9 @@ int main(int argc, char *argv[]) {
         }
         else if(strcmp(argv[i], "-min") == 0){
 
+            calcMMM(0, atoi(argv[i+1]), generateFile(csv_file_path));
+            
+        }
             if(hFLAG){
                 
                 //Search through Brandons array, if argv[i+1] is not found, return EXIT_Failure
@@ -235,23 +206,19 @@ int main(int argc, char *argv[]) {
                 i++; //skip the next argv[i] since it is a corresponding argument for min
             }
             
-        }
-
-
-
-
         
-        else if(argv[i] == "-max"){
+        
+            if(strcmp(argv[i], "-max" ) == 0){
             
             //check if min works first, then copy and paste code here for max
             
         }
-        else if(argv[i] == "-mean"){
+            else if(strcmp(argv[i],"-mean") == 0){
             
             //check if min works first, then copy and past code here for mean
             
         }
-        else if(argv[i] == "records"){
+            else if(strcmp(argv[i], "-records") == 0){
             if(hFLAG){
                 
             }
@@ -259,12 +226,6 @@ int main(int argc, char *argv[]) {
         else{
             printf("Invalid arugument found!\n");
             exit(EXIT_FAILURE);
-        }
-            
-    }
-    
-    
-    //fclose(file);
-    exit(EXIT_SUCCESS);
-}
+        }}}
 
+    
