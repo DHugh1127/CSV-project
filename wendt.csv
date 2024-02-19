@@ -1,0 +1,16 @@
+DATE, UBIT, DURATION, ACTIVITY & TOOL DESCRIPTION
+2024/02/10, bjwendt, 20 minutes, reviewed documentation on fgets  
+2024/02/10, bjwendt, 120 minutes, built function to store the fields of the header line when -h is called
+2024/02/10, bjwendt, 10 minutes, changed structure of conditionals
+2024/02/15, bjwendt, 10 minutes, added missing library functions and cleaned highlighted errors
+2024/02/15, bjwendt, 30 minutes, compile with gcc and started debugging file open issues 
+2024/02/15, bjwendt, 30 minutes, corrected error with wrong arg to fgets / needed FILE* instead of char * / and adjusted corresponding args to functions
+2024/02/15, bjwendt, 45 minutes, working on fixing stack memory usage issue that I have in the head_strings function
+2024/02/16, bjwendt, 30 minutes, trying to figure out why i cannot pull or add or commit to our project
+2024/02/16, bjwendt, 15 minutes, deleted everything and re clonned using rm -rf 
+2024/02/16, bjwendt, 45 minutes, worked with gdb using gcc -g -o csv csv.c // then started working through headers function segmentation fault
+2024/02/16, bjwendt, 45 minutes, worked through above problem / found that headers was being allocatd for because i used gdb to print the value of whole_line and so the fault was with accessing memory with headers[x][y] / the array of pointers was created and allocated but the memory for the strings "x" was not allocated / so i added an allocation for 512 char's probably to many but wanted to be safe
+2024/02/16, bjwendt, 10 minutes, work that i did in my own branch i created i added commited and push and then when i pulled all the work i did was overwritten / nothing saved/ will go to office hours with group to figure out why we are losing saves all the time/ we have practically been only able to work one at a time becasue of these issues
+2024/02/17, bjwendt, 30 minutes, worked with gdb to see why i was still seg faulting / as a stepped through it grabbed the first and second string no problem(p headers[0] then p headers[1] worked) but then the loop wouldnt stop / i realized this was from not having a terminating comma so i doesnt know when to stop 
+2024/02/17, bjwendt, 15 minutes, fix for above problem / just added another check for if \n char was read then it would terminate / but now we have the problem that its not reading from the first line of the csv
+2024/02/18, bjwendt, 30 minutes, worked with group on issue that it is reading the wrong line (groupmate's code called my funciton and it helped to work together)
